@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\FileOrbis_User_Registration.props" />
+</Project>
