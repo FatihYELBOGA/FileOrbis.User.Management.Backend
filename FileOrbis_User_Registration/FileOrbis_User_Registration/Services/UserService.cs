@@ -34,9 +34,9 @@ namespace FileOrbis_User_Registration.Services
         {
             User user = new User();
 
+            Models.File profile = null;
             if (newUser.Profile != null)
             {
-                Models.File profile = null;
                 if (newUser.Profile.Length > 0)
                 {
                     using (var stream = new MemoryStream())
@@ -52,16 +52,8 @@ namespace FileOrbis_User_Registration.Services
                         };
                     }
                 }
-
-                if (user.Profile != null && profile != null)
-                {
-                    user.Profile.Name = profile.Name;
-                    user.Profile.Type = profile.Type;
-                    user.Profile.Content = profile.Content;
-                }
-                else
-                    user.Profile = profile;
             }
+            user.Profile = profile;
 
             user.FirstName = newUser.FirstName;
             user.LastName = newUser.LastName;
@@ -74,35 +66,6 @@ namespace FileOrbis_User_Registration.Services
         public UserResponse Update(UserUpdateRequest updatedUser, int id)
         {
             User user = userRepository.GetById(id);
-
-            if (updatedUser.Profile != null)
-            {
-                Models.File profile = null;
-                if (updatedUser.Profile.Length > 0)
-                {
-                    using (var stream = new MemoryStream())
-                    {
-                        updatedUser.Profile.CopyTo(stream);
-                        var bytes = stream.ToArray();
-
-                        profile = new Models.File()
-                        {
-                            Name = updatedUser.Profile.FileName,
-                            Type = updatedUser.Profile.ContentType,
-                            Content = bytes
-                        };
-                    }
-                }
-
-                if(user.Profile != null && profile != null)
-                {
-                    user.Profile.Name = profile.Name;
-                    user.Profile.Type = profile.Type;
-                    user.Profile.Content = profile.Content;
-                } else
-                    user.Profile = profile;
-            }
-
             user.FirstName = updatedUser.FirstName;
             user.LastName = updatedUser.LastName;
             user.Email = updatedUser.Email;

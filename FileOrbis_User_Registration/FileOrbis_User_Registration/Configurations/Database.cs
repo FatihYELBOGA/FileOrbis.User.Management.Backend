@@ -23,6 +23,7 @@ namespace FileOrbis_User_Registration.Configurations
 
         private static User[] users = new User[]
         {
+            /*
             new User 
             { 
                 FirstName = "Fatih",
@@ -37,6 +38,7 @@ namespace FileOrbis_User_Registration.Configurations
                 Email = "osmanaltunay@gmail.com",
                 Password = Convert.ToBase64String(Encoding.UTF8.GetBytes("osman123"))
             }
+            */
         };
 
         public static void Seed(Database database)
